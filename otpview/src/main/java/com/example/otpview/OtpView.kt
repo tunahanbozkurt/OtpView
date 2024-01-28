@@ -6,6 +6,9 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.os.Build
+import android.os.Bundle
+import android.os.Parcelable
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
 import android.view.inputmethod.InputMethodManager
@@ -14,6 +17,8 @@ import androidx.core.content.res.getDrawableOrThrow
 
 
 private const val DEFAULT_INPUT_COUNT = 6
+private const val SUPER_STATE = "superState"
+private const val IS_INPUT_ERROR_ENABLED = "isInputErrorEnabled"
 
 class OtpView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -138,13 +143,32 @@ class OtpView @JvmOverloads constructor(
     }
 
     override fun onTextChanged(
-        text: CharSequence?,
-        start: Int,
-        lengthBefore: Int,
-        lengthAfter: Int
+        text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int
     ) {
         if (code.length == inputCount) {
             inputFilledListener?.onFilled(code)
+        }
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        return Bundle().apply {
+            putBoolean(IS_INPUT_ERROR_ENABLED, isInputErrorEnabled)
+            putParcelable(SUPER_STATE, super.onSaveInstanceState())
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        (state as? Bundle).apply {
+            if (this != null) {
+                isInputErrorEnabled = getBoolean(IS_INPUT_ERROR_ENABLED, false)
+            }
+            val parcelable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                this?.getParcelable(SUPER_STATE, Parcelable::class.java)
+            } else {
+                this?.getParcelable(SUPER_STATE)
+            }
+            super.onRestoreInstanceState(parcelable ?: state)
         }
     }
 
