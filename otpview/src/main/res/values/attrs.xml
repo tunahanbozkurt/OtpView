@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="OtpView">
+        <attr name="inputCount" format="integer" />
+        <attr name="unSelectedInputDrawable" format="reference" />
+        <attr name="selectedInputDrawable" format="reference" />
+        <attr name="errorInputDrawable" format="reference" />
+        <attr name="paddingBetweenItems" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.example.otpview.OtpView
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="123456"
+        app:inputCount="6"
+        android:inputType="numberPassword"
+        android:textColor="#191B1F"
+        app:errorInputDrawable="@drawable/otp_box_error"
+        app:unSelectedInputDrawable="@drawable/otp_box_unselected"
+        app:selectedInputDrawable="@drawable/otp_box_selected"
+        app:paddingBetweenItems="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/keyboard_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/keyboard_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="OPEN THE KEYBOARD"
+        app:layout_constraintBottom_toTopOf="@+id/set_error_button"
+        app:layout_constraintEnd_toEndOf="@+id/otp_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/otp_view"
+        app:layout_constraintTop_toBottomOf="@+id/otp_view" />
+
+    <Button
+        android:id="@+id/set_error_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="SET ERROR"
+        app:layout_constraintBottom_toTopOf="@+id/clear_error_button"
+        app:layout_constraintEnd_toEndOf="@+id/otp_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/otp_view"
+        app:layout_constraintTop_toBottomOf="@+id/keyboard_button" />
+
+    <Button
+        android:id="@+id/clear_error_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="CLEAR ERROR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/otp_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/otp_view"
+        app:layout_constraintTop_toBottomOf="@+id/set_error_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
